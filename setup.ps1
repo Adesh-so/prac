@@ -22,7 +22,11 @@ if (!(Test-Path $PROFILE)) {
 
 $Marker = "# PRAC DOWNLOADER"
 
-$Existing = Get-Content $PROFILE -Raw
+$Existing = Get-Content $PROFILE -Raw -ErrorAction SilentlyContinue
+
+if ($null -eq $Existing) {
+    $Existing = ""
+}
 
 if (!$Existing.Contains($Marker)) {
     Add-Content -Path $PROFILE -Value @'
